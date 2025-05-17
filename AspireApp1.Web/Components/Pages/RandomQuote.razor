@@ -1,6 +1,8 @@
 @page "/random-quote"
 @rendermode InteractiveServer
 @using System
+@using AspireApp1.Web.Services
+@inject RandomService RandomService
 
 <PageTitle>Random Quote</PageTitle>
 
@@ -26,7 +28,6 @@
 
     private void GenerateRandomQuote()
     {
-        var random = new System.Random();
-        randomQuote = quotes[random.Next(quotes.Count)];
+        randomQuote = RandomService.GenerateRandomQuote();
     }
 }

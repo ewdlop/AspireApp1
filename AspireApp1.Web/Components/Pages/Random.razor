@@ -1,6 +1,8 @@
 @page "/random"
 @rendermode InteractiveServer
 @using System
+@using AspireApp1.Web.Services
+@inject RandomService RandomService
 
 <PageTitle>Random Number Generator</PageTitle>
 
@@ -17,7 +19,6 @@
 
     private void GenerateRandomNumber()
     {
-        var random = new System.Random();
-        randomNumber = random.Next(1, 101); // Generates a number between 1 and 100
+        randomNumber = RandomService.GenerateRandomNumber(1, 101);
     }
 }
