@@ -1,0 +1,32 @@
+@page "/random-quote"
+@rendermode InteractiveServer
+@using System
+
+<PageTitle>Random Quote</PageTitle>
+
+<h1>Random Quote</h1>
+
+<div class="mb-3">
+    <button class="btn btn-primary" @onclick="GenerateRandomQuote">Get Random Quote</button>
+</div>
+
+<p role="status">Quote: <strong>@randomQuote</strong></p>
+
+@code {
+    private string randomQuote = "Click the button to get a random quote!";
+
+    private readonly List<string> quotes = new()
+    {
+        "The only limit to our realization of tomorrow is our doubts of today.",
+        "In the middle of every difficulty lies opportunity.",
+        "Life is 10% what happens to us and 90% how we react to it.",
+        "The best way to predict the future is to create it.",
+        "Success is not final, failure is not fatal: It is the courage to continue that counts."
+    };
+
+    private void GenerateRandomQuote()
+    {
+        var random = new System.Random();
+        randomQuote = quotes[random.Next(quotes.Count)];
+    }
+}

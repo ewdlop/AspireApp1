@@ -1,0 +1,23 @@
+@page "/random"
+@rendermode InteractiveServer
+@using System
+
+<PageTitle>Random Number Generator</PageTitle>
+
+<h1>Random Number Generator</h1>
+
+<div class="mb-3">
+    <button class="btn btn-primary" @onclick="GenerateRandomNumber">Generate Random Number</button>
+</div>
+
+<p role="status">Generated Number: <strong>@randomNumber</strong></p>
+
+@code {
+    private int randomNumber;
+
+    private void GenerateRandomNumber()
+    {
+        var random = new System.Random();
+        randomNumber = random.Next(1, 101); // Generates a number between 1 and 100
+    }
+}
