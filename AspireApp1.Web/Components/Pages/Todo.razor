@@ -1,3 +1,9 @@
+@using Fluxor
+@using AspireApp1.Web.State
+
+@inject IState<TodoState> TodoState
+@inject IDispatcher Dispatcher
+
 @page "/todo"
 @rendermode InteractiveServer
 
@@ -11,7 +17,7 @@
 </div>
 
 <ul class="list-group">
-    @foreach (var todo in todos)
+    @foreach (var todo in TodoState.Value.Todos)
     {
         <li class="list-group-item d-flex justify-content-between align-items-center">
             <span>@todo</span>
@@ -21,21 +27,20 @@
 </ul>
 
 @code {
-    private List<string> todos = new();
     private string newTodo = string.Empty;
 
     private void AddTodo()
     {
         if (!string.IsNullOrWhiteSpace(newTodo))
         {
-            todos.Add(newTodo);
+            Dispatcher.Dispatch(new AddTodoAction(newTodo));
             newTodo = string.Empty;
         }
     }
 
     private void RemoveTodo(string todo)
     {
-        todos.Remove(todo);
+        Dispatcher.Dispatch(new RemoveTodoAction(todo));
     }
 
     private void OnEnter(KeyboardEventArgs e)

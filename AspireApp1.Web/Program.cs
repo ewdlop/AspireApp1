@@ -24,8 +24,11 @@ builder.Services.AddHttpClient<WeatherApiClient>(client =>
 builder.Services.AddSingleton<RandomService>();
 builder.Services.AddMudServices();
 
-builder.Services.AddFluxor(o => o
-   .ScanAssemblies(typeof(Program).Assembly));
+// Remove the UseReduxDevTools call as it may not be supported in the current Fluxor version.
+builder.Services.AddFluxor(options =>
+{
+    options.ScanAssemblies(typeof(Program).Assembly);
+});
 
 var app = builder.Build();
 
