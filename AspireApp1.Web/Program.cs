@@ -1,6 +1,7 @@
 using AspireApp1.Web;
 using AspireApp1.Web.Components;
 using AspireApp1.Web.Services;
+using Fluxor;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,9 @@ builder.Services.AddHttpClient<WeatherApiClient>(client =>
 
 builder.Services.AddSingleton<RandomService>();
 builder.Services.AddMudServices();
+
+builder.Services.AddFluxor(o => o
+   .ScanAssemblies(typeof(Program).Assembly));
 
 var app = builder.Build();
 
